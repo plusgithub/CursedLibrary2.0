@@ -243,7 +243,7 @@ public abstract class SimpleCommandGroup {
 
 	// Return the TM symbol in case we have it for kangarko's plugins
 	private String getTrademark() {
-		return SimplePlugin.getInstance().getDescription().getAuthors().contains("kangarko") ? getHeaderPrefix() + "&8\u2122" : "";
+		return SimplePlugin.getInstance().getDescription().getAuthors().contains("Scuffi") ? getHeaderPrefix() + "&8\u2122" : "";
 	}
 
 	/**
@@ -254,7 +254,7 @@ public abstract class SimpleCommandGroup {
 	 * @return
 	 */
 	protected String getCredits() {
-		return "&7Visit &fmineacademy.org &7for more information.";
+		return "&7Visit &dCursed&aPlanet&7 for more information";
 	}
 
 	/**

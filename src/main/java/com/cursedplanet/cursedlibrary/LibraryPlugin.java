@@ -1,9 +1,13 @@
 package com.cursedplanet.cursedlibrary;
 
+import com.comphenix.protocol.ProtocolLibrary;
 import com.cursedplanet.cursedlibrary.collection.CollectionAPI;
 import com.cursedplanet.cursedlibrary.collection.CollectionCommand;
 import com.cursedplanet.cursedlibrary.collection.CollectionLoader;
 import com.cursedplanet.cursedlibrary.collection.command.CollectionsParent;
+import com.cursedplanet.cursedlibrary.glowing.GlowAPI;
+import com.cursedplanet.cursedlibrary.glowing.listeners.PlayerJoinListener;
+import com.cursedplanet.cursedlibrary.glowing.listeners.PlayerQuitListener;
 import com.cursedplanet.cursedlibrary.lib.Common;
 import com.cursedplanet.cursedlibrary.lib.model.HookManager;
 import com.cursedplanet.cursedlibrary.menu.MenuListeners;
@@ -44,6 +48,19 @@ public class LibraryPlugin extends SimplePlugin {
 		//registerCommand(new TempMenuTest());
 		registerEvents(new MenuListeners());
 		registerEvents(new MenuPrompt());
+
+		//GlowingAPI
+
+		GlowAPI.protocolManager = ProtocolLibrary.getProtocolManager();
+		GlowAPI.asynchronousManager = GlowAPI.protocolManager.getAsynchronousManager();
+
+		GlowAPI.entityMetadataListenerHandler = GlowAPI.asynchronousManager.registerAsyncHandler(GlowAPI.entityMetadataListener);
+		GlowAPI.entityMetadataListenerHandler.syncStart();
+
+		registerEvents(new PlayerJoinListener());
+		registerEvents(new PlayerQuitListener());
+		registerEvents(new Temp());
+
 	}
 
 	@Override
@@ -51,5 +68,8 @@ public class LibraryPlugin extends SimplePlugin {
 
 		//Collections
 		CollectionLoader.saveCollectionItems();
+
+		GlowAPI.asynchronousManager.unregisterAsyncHandler(GlowAPI.entityMetadataListenerHandler);
+		GlowAPI.entityMetadataListenerHandler.stop();
 	}
 }
