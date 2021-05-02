@@ -1,87 +1,70 @@
 package com.cursedplanet.cursedlibrary.random;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.Map.Entry;
 
+public class ItemPicker<T> {
+	private static Random random = new Random();
+	private final HashMap<T, Double> a = new HashMap<>();
 
-/* How to use:
- Create a new instance of ItemPicker in your class
- ItemPicker picker = new ItemPicker();
- picker.addChance(itemStack, chance as %);
-*/
-public class ItemPicker {
-	private class Chance {
-		private int upperLimit;
-		private int lowerLimit;
-		private Object element;
-
-		public Chance(Object element, int lowerLimit, int upperLimit) {
-			this.element = element;
-			this.upperLimit = upperLimit;
-			this.lowerLimit = lowerLimit;
-		}
-
-		public int getUpperLimit() {
-			return this.upperLimit;
-		}
-
-		public int getLowerLimit() {
-			return this.lowerLimit;
-		}
-
-		public Object getElement() {
-			return this.element;
-		}
-
-		@Override
-		public String toString() {
-			return "[" + Integer.toString(this.lowerLimit) + "|" + Integer.toString(this.upperLimit) + "]: " + this.element.toString();
-		}
+	public boolean add(T t, double percent) {
+		a.put(t, percent);
+		return true;
 	}
 
-	private List<Chance> chances;
-	private int sum;
-	private Random random;
-
-	public ItemPicker() {
-		this.random = new Random();
-		this.chances = new ArrayList<>();
-		this.sum = 0;
+	public boolean remove(T t) {
+		a.remove(t);
+		return true;
 	}
 
-	public ItemPicker(long seed) {
-		this.random = new Random(seed);
-		this.chances = new ArrayList<>();
-		this.sum = 0;
+	public boolean contains(T t) {
+		return a.containsKey(t);
 	}
 
-	public void addChance(Object element, int chance) {
-		if (!this.chances.contains(element)) {
-			this.chances.add(new Chance(element, this.sum, this.sum + chance));
-			this.sum = this.sum + chance;
-		} else {
-			// not sure yet, what to do, when the element already exists, since a list can't contain 2 equal entries. Right now a second, identical chance (element + chance must be equal) will be ignored
-		}
+	public double getChance(T t) {
+		return a.get(t);
 	}
 
-	public Object getRandomElement() {
-		int index = this.random.nextInt(this.sum);
-		// debug: System.out.println("Amount of chances: " + Integer.toString(this.chances.size()) + ", possible options: " + Integer.toString(this.sum) + ", chosen option: " + Integer.toString(index));
-		for (Chance chance : this.chances) {
-			// debug: System.out.println(chance.toString());
-			if (chance.getLowerLimit() <= index && chance.getUpperLimit() > index) {
-				return chance.getElement();
-			}
-		}
-		return null; // this should never happen, because the random can't be out of the limits
+	public boolean isEmpty() {
+		return a.isEmpty();
 	}
 
-	public int getOptions() { // might be needed sometimes
-		return this.sum;
+	public Set<Entry<T, Double>> entrySet() {
+		return a.entrySet();
 	}
 
-	public int getChoices() { // might be needed sometimes
-		return this.chances.size();
+	public Set<T> keySet() {
+		return a.keySet();
+	}
+
+	public Collection<Double> values() {
+		return a.values();
+	}
+
+	public T getRandom() {
+		ArrayList<T> t = new ArrayList<>(a.size());
+		for (Entry<T, Double> a : a.entrySet())
+			for (double i = 0; i < a.getValue(); ++i)
+				t.add(a.getKey());
+		if (t.isEmpty()) return null;
+		int r = random.nextInt(t.size());
+		Collections.shuffle(t);
+		return t.get(r);
+	}
+
+	public double getTotalChance() {
+		double chance = 0;
+		for (Entry<T, Double> a : a.entrySet())
+			chance += a.getValue();
+		return chance;
+	}
+
+	public List<T> toList() {
+		ArrayList<T> t = new ArrayList<>(a.size());
+		for (Entry<T, Double> a : a.entrySet())
+			for (double i = 0; i < a.getValue(); ++i)
+				t.add(a.getKey());
+		Collections.shuffle(t);
+		return t;
 	}
 }

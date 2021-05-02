@@ -2,6 +2,6 @@ name: ${project.name}
 version: ${project.version}
 main: com.cursedplanet.cursedlibrary.LibraryPlugin
 author: Scuffi
-description: Cursed library
+description: Cursed library. Credit to TheAPI & KelpFramework for some classes
 api-version: 1.14
 #depend: [ SmartInvs ]
