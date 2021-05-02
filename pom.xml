@@ -100,6 +100,12 @@
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
 
+        <repository>
+            <id>data-local</id>
+            <name>data</name>
+            <url>file://${project.basedir}/src/main/resources</url>
+        </repository>
+
     </repositories>
 
     <!--
@@ -299,11 +305,10 @@
         <!-- Attempt at adding local PathfindingAPI to the plugin -->
 
         <dependency>
-            <groupId>com.yannicklamprecht</groupId>
-            <artifactId>PathfinderAPI</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>C:\Users\iamar\OneDrive\Documents\CursedArmor\src\main\resources\PathfinderAPI.jar</systemPath>
+            <groupId>com.github.ysl3000</groupId>
+            <artifactId>PathfindergoalAPI</artifactId>
+            <version>1.162.0</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
