@@ -100,11 +100,6 @@
         </repository>
 
         <repository>
-            <id>papermc</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
-        </repository>
-
-        <repository>
             <id>data-local</id>
             <name>data</name>
             <url>file://${project.basedir}/src/main/resources</url>
@@ -122,17 +117,18 @@
            Import the Spigot API since it's necessary for our plugin
            Make sure you change the version to the latest version you want to use for your plugin.
        -->
-        <!--<dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-        <version>1.16.5-R0.1-SNAPSHOT</version>
-
-        <scope>provided</scope>
-    </dependency>
-    -->
+        <!--
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
+            <version>1.17-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
             <version>1.17-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>

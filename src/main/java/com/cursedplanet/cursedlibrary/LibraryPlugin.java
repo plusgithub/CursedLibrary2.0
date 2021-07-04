@@ -59,7 +59,6 @@ public class LibraryPlugin extends SimplePlugin {
 
 		registerEvents(new PlayerJoinListener());
 		registerEvents(new PlayerQuitListener());
-		registerCommand(new Temp());
 
 	}
 
