@@ -30,7 +30,7 @@
     <groupId>com.cursedplanet</groupId>
     <artifactId>cursedlibrary</artifactId>
     <name>CursedLibrary</name>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
 
     <!-- ############################################################################### -->
 
@@ -44,10 +44,10 @@
     <properties>
 
         <!-- The full path to your plugin's main class, so that Spigot can find and load it -->
-        <main.class>com.cursedplanet.cursedlibrary.LibraryPlugin</main.class>
+        <main.class>org.mineacademy.foraryPlugin</main.class>
 
         <!-- The Foundation version - change to latest version from https://github.com/kangarko/Foundation/releases -->
-        <foundation.version>5.8.0</foundation.version>
+        <foundation.version>4359619</foundation.version>
 
         <!-- The Java version your plugin uses, see bstats.org for what most servers have and use that -->
         <java.version>1.16.4</java.version>
@@ -70,8 +70,8 @@
    -->
     <repositories>
         <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
             <id>jitpack.io</id>
@@ -129,6 +129,13 @@
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>
             <artifactId>paper-api</artifactId>
+            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
@@ -296,9 +303,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.plusgithub</groupId>
-            <artifactId>CursedPlugins</artifactId>
-            <version>4359619</version>
+            <groupId>com.github.kangarko</groupId>
+            <artifactId>Foundation</artifactId>
+            <version>5.9.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -371,6 +378,7 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+
                         <!--
                             By default we configure the Foundation to include itself and all classes when
                             we set the scope to compile (see above).
@@ -379,24 +387,28 @@
                        -->
                         <configuration>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
-                            <shadedArtifactAttached>true</shadedArtifactAttached>
                             <finalName>${project.name}-${project.version}</finalName>
                             <artifactSet>
                                 <includes>
-                                    <!-- <include>org.mineacademy:Game*</include>
-                                     <include>com.github.kangarko:Foundation*</include>-->
-                                    <include>fr.minuskube.inv:smart-invs*</include>
-                                    <include>com.github.plusgithub:CursedPlugins*</include>
+                                    <include>org.mineacademy:Game*</include>
+                                    <include>com.github.kangarko:Foundation*</include>
                                     <include>com.yannicklamprecht:PathfinderAPI*</include>
+                                    <include>fr.minuskube.inv:smart-invs*</include>
                                 </includes>
-                                <!-- <excludes>
-                                     <exclude>org.mineacademy:GameAPI*</exclude>
-                            </excludes> -->
+                                <excludes>
+                                    <exclude>org.mineacademy:GameAPI*</exclude>
+                                </excludes>
                             </artifactSet>
                             <relocations>
                                 <relocation>
-                                    <pattern>com.cursedplanet.cursedplugins</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.plugin</shadedPattern>
+                                    <pattern>org.mineacademy</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.lib</shadedPattern>
+                                    <excludes>
+                                        <exclude>org.mineacademy.${project.artifactId}.*</exclude>
+                                        <exclude>org.mineacademy.gameapi.*</exclude>
+                                        <exclude>org.mineacademy.boss.*</exclude>
+                                        <exclude>org.mineacademy.worldeditbridge.*</exclude>
+                                    </excludes>
                                 </relocation>
                             </relocations>
                         </configuration>

@@ -1,6 +1,6 @@
 package com.cursedplanet.cursedlibrary.collection.command;
 
-import com.cursedplanet.cursedlibrary.lib.command.SimpleCommandGroup;
+import org.mineacademy.fo.command.SimpleCommandGroup;
 
 public class CollectionsParent extends SimpleCommandGroup {
 

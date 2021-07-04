@@ -1,7 +1,7 @@
 package com.cursedplanet.cursedlibrary.collection;
 
 import org.bukkit.entity.Player;
-import com.cursedplanet.cursedlibrary.lib.command.SimpleCommand;
+import org.mineacademy.fo.command.SimpleCommand;
 
 public class CollectionCommand extends SimpleCommand {
 
@@ -19,7 +19,7 @@ public class CollectionCommand extends SimpleCommand {
 		CollectMenu.INVENTORY.open(getPlayer());
 
 		Player player = getPlayer();
-		
+
 		if (args.length >= 1) {
 			player = findPlayer(args[0]);
 		}

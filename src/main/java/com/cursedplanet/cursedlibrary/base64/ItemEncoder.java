@@ -3,7 +3,7 @@ package com.cursedplanet.cursedlibrary.base64;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.inventory.ItemStack;
-import com.cursedplanet.cursedlibrary.lib.Common;
+import org.mineacademy.fo.Common;
 
 import java.util.Base64;
 import java.util.Map;

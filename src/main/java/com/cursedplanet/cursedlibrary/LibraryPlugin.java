@@ -8,13 +8,13 @@ import com.cursedplanet.cursedlibrary.collection.command.CollectionsParent;
 import com.cursedplanet.cursedlibrary.glowing.GlowAPI;
 import com.cursedplanet.cursedlibrary.glowing.listeners.PlayerJoinListener;
 import com.cursedplanet.cursedlibrary.glowing.listeners.PlayerQuitListener;
-import com.cursedplanet.cursedlibrary.lib.Common;
-import com.cursedplanet.cursedlibrary.lib.model.HookManager;
 import com.cursedplanet.cursedlibrary.menu.MenuListeners;
 import com.cursedplanet.cursedlibrary.menu.MenuPrompt;
 import com.cursedplanet.cursedlibrary.pluginchecker.JoinChecker;
-import com.cursedplanet.cursedplugins.plugin.SimplePlugin;
 import fr.minuskube.inv.InventoryManager;
+import org.mineacademy.fo.Common;
+import org.mineacademy.fo.model.HookManager;
+import org.mineacademy.fo.plugin.SimplePlugin;
 
 public class LibraryPlugin extends SimplePlugin {
 
@@ -59,7 +59,7 @@ public class LibraryPlugin extends SimplePlugin {
 
 		registerEvents(new PlayerJoinListener());
 		registerEvents(new PlayerQuitListener());
-		registerEvents(new Temp());
+		registerCommand(new Temp());
 
 	}
 

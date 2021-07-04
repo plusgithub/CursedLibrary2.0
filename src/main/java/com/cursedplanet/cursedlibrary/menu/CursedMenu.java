@@ -1,8 +1,6 @@
 package com.cursedplanet.cursedlibrary.menu;
 
 import com.cursedplanet.cursedlibrary.LibraryPlugin;
-import com.cursedplanet.cursedlibrary.lib.Common;
-import com.cursedplanet.cursedlibrary.lib.PlayerUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,6 +12,8 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
+import org.mineacademy.fo.Common;
+import org.mineacademy.fo.PlayerUtil;
 
 import java.util.*;
 import java.util.function.Consumer;

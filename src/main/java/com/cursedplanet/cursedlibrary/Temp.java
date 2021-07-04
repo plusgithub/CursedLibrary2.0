@@ -1,21 +1,20 @@
 package com.cursedplanet.cursedlibrary;
 
-import com.cursedplanet.cursedlibrary.glowing.GlowAPI;
-import com.cursedplanet.cursedlibrary.lib.remain.Remain;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import com.cursedplanet.cursedlibrary.entity.EntityCreator;
+import org.bukkit.entity.EntityType;
+import org.mineacademy.fo.command.SimpleCommand;
 
-public class Temp implements Listener {
+public class Temp extends SimpleCommand {
+	protected Temp() {
+		super("temp");
+	}
 
-	@EventHandler
-	public void onHit(EntityDamageByEntityEvent event) {
-		if (!(event.getDamager() instanceof Player))
-			return;
+	@Override
+	protected void onCommand() {
+		checkConsole();
 
-		Player player = (Player) event.getDamager();
-
-		GlowAPI.setGlowing(event.getEntity(), GlowAPI.Color.LIGHT_PURPLE, Remain.getOnlinePlayers());
+		EntityCreator creator = new EntityCreator(EntityType.ZOMBIE);
+		creator.setGlowing(true, com.cursedplanet.cursedlibrary.glowing.GlowAPI.Color.DARK_PURPLE);
+		creator.summonEntity(getPlayer().getLocation());
 	}
 }

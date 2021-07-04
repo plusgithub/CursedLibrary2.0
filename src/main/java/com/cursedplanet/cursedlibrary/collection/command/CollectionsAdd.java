@@ -3,12 +3,12 @@ package com.cursedplanet.cursedlibrary.collection.command;
 import com.Zrips.CMI.CMI;
 import com.cursedplanet.cursedlibrary.collection.CollectionLoader;
 import com.cursedplanet.cursedlibrary.collection.CollectionStorage;
-import com.cursedplanet.cursedlibrary.lib.Common;
-import com.cursedplanet.cursedlibrary.lib.command.SimpleCommandGroup;
-import com.cursedplanet.cursedlibrary.lib.command.SimpleSubCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.mineacademy.fo.Common;
+import org.mineacademy.fo.command.SimpleCommandGroup;
+import org.mineacademy.fo.command.SimpleSubCommand;
 
 public class CollectionsAdd extends SimpleSubCommand {
 

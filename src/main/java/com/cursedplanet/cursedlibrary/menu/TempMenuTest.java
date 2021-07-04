@@ -1,6 +1,6 @@
 package com.cursedplanet.cursedlibrary.menu;
 
-import com.cursedplanet.cursedlibrary.lib.command.SimpleCommand;
+import org.mineacademy.fo.command.SimpleCommand;
 
 public class TempMenuTest extends SimpleCommand {
 

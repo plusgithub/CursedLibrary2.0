@@ -1,10 +1,10 @@
 package com.cursedplanet.cursedlibrary.menu;
 
-import com.cursedplanet.cursedlibrary.lib.menu.model.ItemCreator;
-import com.cursedplanet.cursedlibrary.lib.remain.CompMaterial;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.mineacademy.fo.menu.model.ItemCreator;
+import org.mineacademy.fo.remain.CompMaterial;
 
 import java.util.Objects;
 

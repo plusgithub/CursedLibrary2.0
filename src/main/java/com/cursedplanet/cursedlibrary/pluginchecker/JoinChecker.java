@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
-import com.cursedplanet.cursedlibrary.lib.Common;
+import org.mineacademy.fo.Common;
 
 import java.util.UUID;
 

@@ -9,8 +9,8 @@ public class GoalFollowEntity implements PathfinderGoal {
 	private final LivingEntity entity;
 	private final double moveRadius;
 	private boolean isAlreadySet;
-	private Insentient pathfinderGoalEntity;
-	private double walkSpeed;
+	private final Insentient pathfinderGoalEntity;
+	private final double walkSpeed;
 
 
 	public GoalFollowEntity(Insentient pathfinderGoalEntity, LivingEntity entity,

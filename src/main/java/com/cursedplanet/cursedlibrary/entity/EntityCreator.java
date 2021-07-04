@@ -1,7 +1,10 @@
-package com.cursedplanet.cursedlibrary.lib;
+package com.cursedplanet.cursedlibrary.entity;
 
 import com.cursedplanet.cursedlibrary.LibraryPlugin;
+import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_16_R3.entity.CraftMob;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.*;
 import org.bukkit.entity.Horse.Color;
 import org.bukkit.entity.Horse.Variant;
@@ -13,7 +16,10 @@ import org.bukkit.loot.LootTable;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.util.EulerAngle;
+import org.mineacademy.fo.Common;
+import org.mineacademy.fo.remain.Remain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +37,13 @@ public class EntityCreator {
 
 	public static enum AttackDamageType {
 		MINIMAL, MAXIMAL
+	}
+
+	public void addGoal(Integer priority, PathfinderGoal goal) {
+
+		EntityInsentient poo = ((CraftMob) entity).getHandle();
+
+		poo.goalSelector.a(priority, goal);
 	}
 
 	double min, max, set, jump;
@@ -99,8 +112,25 @@ public class EntityCreator {
 		gravity = setGravity;
 	}
 
+	private com.cursedplanet.cursedlibrary.glowing.GlowAPI.Color glowColor;
+	private Player[] glowPlayers;
+
 	public void setGlowing(boolean setGlow) {
 		glow = setGlow;
+		glowColor = com.cursedplanet.cursedlibrary.glowing.GlowAPI.Color.WHITE;
+		glowPlayers = Remain.getOnlinePlayers().toArray(new Player[0]);
+	}
+
+	public void setGlowing(boolean setGlow, com.cursedplanet.cursedlibrary.glowing.GlowAPI.Color color) {
+		glow = setGlow;
+		glowColor = color;
+		glowPlayers = Remain.getOnlinePlayers().toArray(new Player[0]);
+	}
+
+	public void setGlowing(boolean setGlow, com.cursedplanet.cursedlibrary.glowing.GlowAPI.Color color, Player... players) {
+		glow = setGlow;
+		glowColor = color;
+		glowPlayers = players;
 	}
 
 	public void setGod(boolean setGod) {
@@ -245,7 +275,6 @@ public class EntityCreator {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void setVillagerOptions(Map<VillagerOptions, Object> w) {
 		for (VillagerOptions a : w.keySet()) {
 			switch (a) {
@@ -515,7 +544,7 @@ public class EntityCreator {
 				e.setMetadata("damage:set", metadataValue);
 			}
 			try {
-				e.setAI(ai);
+				//e.setAI(ai);
 				e.setCollidable(collidable);
 			} catch (Exception | NoSuchFieldError | NoSuchMethodError err) {
 
@@ -523,7 +552,8 @@ public class EntityCreator {
 			e.setCanPickupItems(items);
 			try {
 				e.setGravity(gravity);
-				e.setGlowing(glow);
+				if (glow)
+					com.cursedplanet.cursedlibrary.glowing.GlowAPI.setGlowing(e, glowColor, Arrays.asList(glowPlayers));
 				e.setInvulnerable(isGod);
 			} catch (Exception | NoSuchFieldError | NoSuchMethodError err) {
 
@@ -537,9 +567,23 @@ public class EntityCreator {
 			} catch (Exception | NoSuchFieldError | NoSuchMethodError err) {
 
 			}
+
+			EntityInsentient poo = ((CraftMob) e).getHandle();
+
+			List<?> goalB = (List<?>) PathfindingUtils.getPrivateField("b", PathfinderGoalSelector.class, poo.goalSelector);
+			goalB.clear();
+			List<?> goalC = (List<?>) PathfindingUtils.getPrivateField("c", PathfinderGoalSelector.class, poo.goalSelector);
+			goalC.clear();
+			List<?> targetB = (List<?>) PathfindingUtils.getPrivateField("b", PathfinderGoalSelector.class, poo.targetSelector);
+			targetB.clear();
+			List<?> targetC = (List<?>) PathfindingUtils.getPrivateField("c", PathfinderGoalSelector.class, poo.targetSelector);
+			targetC.clear();
+
+			poo.goalSelector.a(0, new PathfinderGoalLookAtPlayer(poo, EntityHuman.class, 8.0F));
+
 		} catch (Exception es) {
 			Common.log("Entity Spawn exception");
-			System.out.print(es);
+			es.printStackTrace();
 		}
 	}
 }

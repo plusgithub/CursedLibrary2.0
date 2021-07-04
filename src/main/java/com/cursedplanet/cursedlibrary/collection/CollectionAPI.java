@@ -3,7 +3,7 @@ package com.cursedplanet.cursedlibrary.collection;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import com.cursedplanet.cursedlibrary.lib.Common;
+import org.mineacademy.fo.Common;
 
 import java.util.*;
 

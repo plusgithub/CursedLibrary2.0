@@ -1,11 +1,11 @@
 package com.cursedplanet.cursedlibrary.menu;
 
-import com.cursedplanet.cursedlibrary.lib.Common;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.mineacademy.fo.Common;
 
 import java.util.HashMap;
 import java.util.Map;
