@@ -38,9 +38,7 @@ public class LibraryPlugin extends SimplePlugin {
 		CollectionLoader.loadCollectionItems();
 		CollectionLoader.loadCollectionConfig();
 
-		HookManager.addPlaceholder("uncollected_items", (player) -> {
-			return String.valueOf(CollectionAPI.getPlayerItems(player).size());
-		});
+		HookManager.addPlaceholder("uncollected_items", (player) -> String.valueOf(CollectionAPI.getPlayerItems(player).size()));
 
 		manager = new InventoryManager(LibraryPlugin.getInstance());
 		manager.init();

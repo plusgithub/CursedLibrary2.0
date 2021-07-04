@@ -1,6 +1,6 @@
 name: ${project.name}
 version: ${project.version}
-main: org.mineacademy.foraryPlugin
+main: com.cursedplanet.cursedlibrary.LibraryPlugin
 author: Scuffi
 description: Cursed library. Credit to TheAPI(EntityCreator), metalshark(GlowAPI), juliarn(NPC API)
 api-version: 1.16
