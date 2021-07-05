@@ -25,8 +25,6 @@ public class PromptHandler implements Listener {
 				prompts.get(player).pass(event.getMessage());
 			});
 		}
-
-		//event.getRecipients().removeAll(engagedPlayers.keySet());
 	}
 
 	@EventHandler
