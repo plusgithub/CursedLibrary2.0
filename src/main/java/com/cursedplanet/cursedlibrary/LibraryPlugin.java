@@ -9,7 +9,8 @@ import com.cursedplanet.cursedlibrary.glowing.GlowAPI;
 import com.cursedplanet.cursedlibrary.glowing.listeners.PlayerJoinListener;
 import com.cursedplanet.cursedlibrary.glowing.listeners.PlayerQuitListener;
 import com.cursedplanet.cursedlibrary.menu.MenuListeners;
-import com.cursedplanet.cursedlibrary.menu.MenuPrompt;
+import com.cursedplanet.cursedlibrary.menu.PromptHandler;
+import com.cursedplanet.cursedlibrary.menu.TempMenuTest;
 import com.cursedplanet.cursedlibrary.pluginchecker.JoinChecker;
 import fr.minuskube.inv.InventoryManager;
 import org.mineacademy.fo.Common;
@@ -43,9 +44,9 @@ public class LibraryPlugin extends SimplePlugin {
 		manager = new InventoryManager(LibraryPlugin.getInstance());
 		manager.init();
 
-		//registerCommand(new TempMenuTest());
+		registerCommand(new TempMenuTest());
 		registerEvents(new MenuListeners());
-		registerEvents(new MenuPrompt());
+		registerEvents(new PromptHandler());
 
 		//GlowingAPI
 
@@ -57,6 +58,7 @@ public class LibraryPlugin extends SimplePlugin {
 
 		registerEvents(new PlayerJoinListener());
 		registerEvents(new PlayerQuitListener());
+
 
 	}
 

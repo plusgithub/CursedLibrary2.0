@@ -78,7 +78,7 @@ public class TestTwoMenu extends CursedMenu {
 		}).lock();
 
 		addClickable(47, ItemCreator.of(CompMaterial.ARROW, "&cPrevious page").build().makeSurvival(), (e) -> {
-			MenuPrompt.engageInPrompt((Player) getViewers().get(0), this, 100, string -> {
+			new MenuPrompt((Player) getViewers().get(0), this, 100, string -> {
 				addStatic(47, new ItemStack(Objects.requireNonNull(Material.getMaterial(string))));
 			}, "", "&b&lType your input below:", "");
 		}).lock();
