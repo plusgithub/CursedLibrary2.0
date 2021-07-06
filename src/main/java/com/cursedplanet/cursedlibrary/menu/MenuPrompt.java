@@ -35,7 +35,8 @@ public class MenuPrompt implements Listener {
 	}
 
 	public void pass(String message) {
-		action.accept(message);
+		if (!message.equalsIgnoreCase("cancel"))
+			action.accept(message);
 		disengage();
 	}
 
