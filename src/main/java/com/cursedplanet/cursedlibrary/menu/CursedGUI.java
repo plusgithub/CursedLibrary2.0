@@ -790,12 +790,12 @@ public class CursedGUI {
 	/**
 	 * Resets all the slots in the menu, starting from fresh without creating a new menu
 	 */
-	public CursedSlot[] reset() {
+	public void reset() {
 		this.contents = new HashMap<>();
 		for (int i = 0; i < size; i++) {
 			contents.put(i, new CursedSlot(i));
 		}
-		return (CursedSlot[]) contents.keySet().toArray();
+		//return contents.keySet().toArray(CursedSlot[]::new);
 	}
 
 	/**

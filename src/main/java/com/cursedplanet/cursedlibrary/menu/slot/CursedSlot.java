@@ -93,8 +93,9 @@ public class CursedSlot {
 	 *
 	 * @param type The clicktype that should be allowed
 	 */
-	public void allow(ClickType... type) {
+	public CursedSlot allow(ClickType... type) {
 		allowedClicks.addAll(Arrays.asList(type));
+		return this;
 	}
 
 	/**
@@ -102,8 +103,9 @@ public class CursedSlot {
 	 *
 	 * @param action The inventoryaction that should be allowed
 	 */
-	public void allow(InventoryAction... action) {
+	public CursedSlot allow(InventoryAction... action) {
 		allowedActions.addAll(Arrays.asList(action));
+		return this;
 	}
 
 	/**
@@ -111,8 +113,9 @@ public class CursedSlot {
 	 *
 	 * @param type The clicktype that should be disallowed
 	 */
-	public void disallow(ClickType... type) {
+	public CursedSlot disallow(ClickType... type) {
 		allowedClicks.removeAll(Arrays.asList(type));
+		return this;
 	}
 
 	/**
@@ -120,22 +123,25 @@ public class CursedSlot {
 	 *
 	 * @param action The inventoryaction that should be disallowed
 	 */
-	public void disallow(InventoryAction... action) {
+	public CursedSlot disallow(InventoryAction... action) {
 		allowedActions.removeAll(Arrays.asList(action));
+		return this;
 	}
 
 	/**
 	 * Quickly allow all ClickTypes instead of doing it manually
 	 */
-	public void allowAllClicks() {
+	public CursedSlot allowAllClicks() {
 		allowedClicks.addAll(Arrays.asList(ClickType.values()));
+		return this;
 	}
 
 	/**
 	 * Quickly allow all InventoryActions instead of doing it manually
 	 */
-	public void allowAllActions() {
+	public CursedSlot allowAllActions() {
 		allowedActions.addAll(Arrays.asList(InventoryAction.values()));
+		return this;
 	}
 
 	/**
@@ -166,8 +172,9 @@ public class CursedSlot {
 	 *
 	 * @param item is the item that will be in that slot
 	 */
-	public void setItem(ItemStack item) {
+	public CursedSlot setItem(ItemStack item) {
 		this.item = item;
+		return this;
 	}
 
 	/**
@@ -175,7 +182,8 @@ public class CursedSlot {
 	 *
 	 * @param action The runnable action when this slot is clicked
 	 */
-	public void setAction(Consumer<InventoryClickEvent> action) {
+	public CursedSlot setAction(Consumer<InventoryClickEvent> action) {
 		this.task = action;
+		return this;
 	}
 }
