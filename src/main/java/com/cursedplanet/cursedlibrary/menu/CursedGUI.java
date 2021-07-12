@@ -37,7 +37,7 @@ public class CursedGUI {
 
 	// Pagination
 	private String pagePatternSingle;
-	private final List<CursedSlot> pageItems;
+	private List<CursedSlot> pageItems;
 	private Integer currentPage;
 	private CursedPageButton pageButtons;
 
@@ -115,7 +115,7 @@ public class CursedGUI {
 	 * @return the itemstack
 	 */
 	public ItemStack getItemAt(int slot) {
-		return contents.get(slot).getItem();
+		return inv.getItem(slot);
 	}
 
 	/**
@@ -802,6 +802,10 @@ public class CursedGUI {
 		for (int i : contents.keySet()) {
 			addStatic(empty, i).allowAllActions().allowAllClicks();
 		}
+		this.pagePatternSingle = null;
+		this.pageItems = new ArrayList<>();
+		this.currentPage = 1;
+		this.pageButtons = new CursedPageButton();
 		//return contents.keySet().toArray(CursedSlot[]::new);
 	}
 
