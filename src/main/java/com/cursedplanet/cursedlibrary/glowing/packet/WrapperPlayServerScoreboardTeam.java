@@ -19,7 +19,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 	private static final byte ALLOW_FRIENDLY_FIRE = 0x01;
 	private static final byte CAN_SEE_FRIENDLY_INVISIBLES = 0x02;
 
-	/**
+	/***
 	 * Enumeration of all the known packet modes.
 	 *
 	 * @author Kristian
@@ -81,7 +81,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		super(packet, TYPE);
 	}
 
-	/**
+	/***
 	 * Retrieve an unique name for the team. (Shared with scoreboard)..
 	 *
 	 * @return The current Team Name
@@ -91,7 +91,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return handle.getStrings().read(0);
 	}
 
-	/**
+	/***
 	 * Set an unique name for the team. (Shared with scoreboard)..
 	 *
 	 * @param value - new value.
@@ -100,7 +100,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getStrings().write(0, value);
 	}
 
-	/**
+	/***
 	 * Retrieve the current packet {@link Modes}.
 	 * <p>
 	 * This determines whether or not team information is added or removed.
@@ -112,7 +112,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return Modes.valueOf(handle.getIntegers().read(0));
 	}
 
-	/**
+	/***
 	 * Set the current packet {@link Modes}.
 	 * <p>
 	 * This determines whether or not team information is added or removed.
@@ -123,7 +123,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getIntegers().write(0, value.packetMode);
 	}
 
-	/**
+	/***
 	 * Retrieve the team display name.
 	 * <p>
 	 * A team must be created or updated.
@@ -135,7 +135,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return handle.getChatComponents().read(0).toString();
 	}
 
-	/**
+	/***
 	 * Set the team display name.
 	 * <p>
 	 * A team must be created or updated.
@@ -146,7 +146,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getChatComponents().write(0, WrappedChatComponent.fromText(value));
 	}
 
-	/**
+	/***
 	 * Retrieve the team prefix. This will be inserted before the name of each team member.
 	 * <p>
 	 * A team must be created or updated.
@@ -158,7 +158,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return handle.getChatComponents().read(1).toString();
 	}
 
-	/**
+	/***
 	 * Set the team prefix. This will be inserted before the name of each team member.
 	 * <p>
 	 * A team must be created or updated.
@@ -169,7 +169,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getChatComponents().write(1, WrappedChatComponent.fromText(value));
 	}
 
-	/**
+	/***
 	 * Retrieve the team suffix. This will be inserted after the name of each team member.
 	 * <p>
 	 * A team must be created or updated.
@@ -181,7 +181,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return handle.getChatComponents().read(2).toString();
 	}
 
-	/**
+	/***
 	 * Set the team suffix. This will be inserted after the name of each team member.
 	 * <p>
 	 * A team must be created or updated.
@@ -193,7 +193,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getChatComponents().write(2, wrappedChatComponent);
 	}
 
-	/**
+	/***
 	 * Retrieve whether or not friendly fire is enabled.
 	 * <p>
 	 * A team must be created or updated.
@@ -206,7 +206,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return allowFriendlyFire != 0;
 	}
 
-	/**
+	/***
 	 * Set whether or not friendly fire is enabled.
 	 * <p>
 	 * A team must be created or updated.
@@ -220,7 +220,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getIntegers().write(1, packOptionData);
 	}
 
-	/**
+	/***
 	 * Retrieve whether or not friendly invisibles can be seen.
 	 * <p>
 	 * A team must be created or updated.
@@ -233,7 +233,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return canSeeFriendlyInvisibles != 0;
 	}
 
-	/**
+	/***
 	 * Set whether or not friendly invisibles can be seen.
 	 * <p>
 	 * A team must be created or updated.
@@ -247,7 +247,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getIntegers().write(1, packOptionData);
 	}
 
-	/**
+	/***
 	 * Retrieve the list of entries.
 	 * <p>
 	 * Packet mode must be one of the following for this to be valid:
@@ -264,7 +264,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return handle.getSpecificModifier(Collection.class).read(0);
 	}
 
-	/**
+	/***
 	 * Set the list of entries.
 	 * <p>
 	 * Packet mode must be one of the following for this to be valid:
@@ -280,7 +280,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		handle.getSpecificModifier(Collection.class).write(0, entries);
 	}
 
-	/**
+	/***
 	 * Retrieve the color of a team
 	 * <p>
 	 * A team must be created or updated.
@@ -292,7 +292,7 @@ public class WrapperPlayServerScoreboardTeam extends AbstractPacket {
 		return handle.getEnumModifier(ChatColor.class, EnumChatFormat).read(0);
 	}
 
-	/**
+	/***
 	 * Sets the color of a team.
 	 * <p>
 	 * A team must be created or updated.

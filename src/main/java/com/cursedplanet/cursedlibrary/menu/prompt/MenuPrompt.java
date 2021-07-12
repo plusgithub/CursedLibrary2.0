@@ -1,5 +1,6 @@
-package com.cursedplanet.cursedlibrary.menu;
+package com.cursedplanet.cursedlibrary.menu.prompt;
 
+import com.cursedplanet.cursedlibrary.menu.CursedGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.mineacademy.fo.Common;
@@ -11,11 +12,11 @@ public class MenuPrompt implements Listener {
 	//private CursedMenu menu = null;
 	Integer cancelTicks;
 	Player player;
-	CursedMenu menu;
+	CursedGUI menu;
 	Consumer<String> action;
 	String[] lines;
 
-	public MenuPrompt(Player player, CursedMenu menu, Integer cancelTicks, Consumer<String> action, String... lines) {
+	public MenuPrompt(Player player, CursedGUI menu, Integer cancelTicks, Consumer<String> action, String... lines) {
 		this.cancelTicks = cancelTicks;
 		this.player = player;
 		this.menu = menu;

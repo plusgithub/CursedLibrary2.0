@@ -22,7 +22,7 @@ import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.stream.IntStream;
 
-/*
+/**
 How to use:
 
 First create an instance of the sign factory in your main plugin class:

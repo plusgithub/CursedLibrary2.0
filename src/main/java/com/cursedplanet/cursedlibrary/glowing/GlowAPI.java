@@ -52,7 +52,7 @@ public class GlowAPI {
 	public static AsynchronousManager asynchronousManager;
 	public static AsyncListenerHandler entityMetadataListenerHandler;
 
-	/**
+	/***
 	 * Team Colors
 	 */
 	public enum Color {

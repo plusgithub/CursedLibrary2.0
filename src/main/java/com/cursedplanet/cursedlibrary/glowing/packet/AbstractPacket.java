@@ -14,7 +14,7 @@ public abstract class AbstractPacket {
 	// The packet we will be modifying
 	protected PacketContainer handle;
 
-	/**
+	/***
 	 * Constructs a new strongly typed wrapper for the given packet.
 	 *
 	 * @param handle - handle to the raw packet data.
@@ -30,7 +30,7 @@ public abstract class AbstractPacket {
 		this.handle = handle;
 	}
 
-	/**
+	/***
 	 * Retrieve a handle to the raw packet data.
 	 *
 	 * @return Raw packet data.
@@ -40,7 +40,7 @@ public abstract class AbstractPacket {
 		return handle;
 	}
 
-	/**
+	/***
 	 * Send the current packet to the given receiver.
 	 *
 	 * @param player - the receiver.
@@ -54,14 +54,14 @@ public abstract class AbstractPacket {
 		}
 	}
 
-	/**
+	/***
 	 * Send the current packet to all online players.
 	 */
 	public void broadcastPacket() {
 		ProtocolLibrary.getProtocolManager().broadcastServerPacket(getHandle());
 	}
 
-	/**
+	/***
 	 * Simulate receiving the current packet from the given sender.
 	 *
 	 * @param player - the sender.

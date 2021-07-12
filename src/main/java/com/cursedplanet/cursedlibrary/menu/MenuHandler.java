@@ -7,24 +7,21 @@ import java.util.UUID;
 
 public class MenuHandler {
 
-	private static final HashMap<UUID, CursedMenu> inventories = new HashMap<>();
+	private static final HashMap<UUID, CursedGUI> inventories = new HashMap<>();
 
-	public static void openInventory(Player player, CursedMenu menu) {
-		inventories.put(player.getUniqueId(), menu);
+	public static void removeInventory(CursedGUI gui) {
+		inventories.remove(gui.getId());
 	}
 
-	public static void closeInventory(Player player) {
-		//Common.runLater(0, () -> {
-		//	inventories.remove(player.getUniqueId());
-		//});
-		inventories.remove(player.getUniqueId());
-	}
-
-	public static CursedMenu getInventory(Player player) {
-		return inventories.get(player.getUniqueId());
+	public static CursedGUI getInventory(UUID uuid) {
+		return inventories.get(uuid);
 	}
 
 	public static boolean isViewing(Player player) {
-		return inventories.containsKey(player.getUniqueId());
+		return player.getInventory().getHolder() instanceof CursedHolder;
+	}
+
+	static void addInventory(CursedGUI gui) {
+		inventories.put(gui.getId(), gui);
 	}
 }

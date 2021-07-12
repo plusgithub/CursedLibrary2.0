@@ -315,13 +315,6 @@
 
         <!-- Attempt at adding local PathfindingAPI to the plugin -->
 
-        <dependency>
-            <groupId>com.github.ysl3000</groupId>
-            <artifactId>PathfindergoalAPI</artifactId>
-            <version>1.162.0</version>
-            <scope>compile</scope>
-        </dependency>
-
 
         <!-- Our brand new NPC lib thanks to juliarn -->
 

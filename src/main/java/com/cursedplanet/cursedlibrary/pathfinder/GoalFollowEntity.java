@@ -26,7 +26,7 @@ public class GoalFollowEntity implements PathfinderGoal {
 		return this.isAlreadySet = !this.pathfinderGoalEntity.getNavigation().isDoneNavigating();
 	}
 
-	/**
+	/***
 	 * Whether the goal should Terminate
 	 *
 	 * @return true if should terminate
@@ -40,7 +40,7 @@ public class GoalFollowEntity implements PathfinderGoal {
 				.distance(this.entity.getLocation()) > this.moveRadius;
 	}
 
-	/**
+	/***
 	 * Runs initially and should be used to setUp goalEnvironment Condition needs to be defined thus
 	 * your code in it isn't called
 	 */
@@ -51,7 +51,7 @@ public class GoalFollowEntity implements PathfinderGoal {
 		}
 	}
 
-	/**
+	/***
 	 * Is called when {@link #shouldExecute()} returns true
 	 */
 	@Override

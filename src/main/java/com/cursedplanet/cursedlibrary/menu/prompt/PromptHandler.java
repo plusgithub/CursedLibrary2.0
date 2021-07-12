@@ -1,4 +1,4 @@
-package com.cursedplanet.cursedlibrary.menu;
+package com.cursedplanet.cursedlibrary.menu.prompt;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -17,7 +17,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 
-/**
+/***
  * @author Benjamin | Bentipa
  * @version 1.0 Created on 03.04.2015
  */
@@ -31,7 +31,7 @@ public class AutoUpdate {
 
 	private boolean canceled = false;
 
-	/**
+	/***
 	 * Create a new SpigotPluginUpdate to check and update your plugin
 	 *
 	 * @param plugin    - your plugin
@@ -54,21 +54,21 @@ public class AutoUpdate {
 
 	private boolean out = true;
 
-	/**
+	/***
 	 * Enable a console output if new Version is availible
 	 */
 	public void enableOut() {
 		out = true;
 	}
 
-	/**
+	/***
 	 * Disable a console output if new Version is availible
 	 */
 	public void disableOut() {
 		out = false;
 	}
 
-	/**
+	/***
 	 * Check for a new Update
 	 *
 	 * @return if new update is availible
@@ -106,7 +106,7 @@ public class AutoUpdate {
 		return false;
 	}
 
-	/**
+	/***
 	 * Checks if there is a new Version
 	 *
 	 * @param oldv
@@ -138,7 +138,7 @@ public class AutoUpdate {
 		return false;
 	}
 
-	/**
+	/***
 	 * Executes the Update and trys to install it
 	 */
 	public void update() {
@@ -177,7 +177,7 @@ public class AutoUpdate {
 		}
 	}
 
-	/**
+	/***
 	 * Executes the Update and trys to install it But uses an external link for
 	 * downloading the File
 	 */

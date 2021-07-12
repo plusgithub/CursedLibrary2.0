@@ -1,64 +1,62 @@
 package com.cursedplanet.cursedlibrary.menu;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.ItemStack;
 import org.mineacademy.fo.menu.model.ItemCreator;
 import org.mineacademy.fo.remain.CompMaterial;
 
-import java.util.Objects;
-
-public class TestTwoMenu extends CursedMenu {
+public class TestTwoMenu extends CursedGUI {
 
 
 	public TestTwoMenu() {
-		super(54, "Cool menu", "cool_menu");
+		super(54, "Cool menu");
 
-		/*addStatic(5, new ItemStack(Material.DIAMOND)).lock();
+		/**addStatic(5, new ItemStack(Material.DIAMOND)).lock();
 
-		addClickable(6, new ItemStack(Material.IRON_BARS), () -> {
-			addStatic(6, new ItemStack(Material.DIAMOND)).lock();
-		}).lock();
+		 addClickable(6, new ItemStack(Material.IRON_BARS), () -> {
+		 addStatic(6, new ItemStack(Material.DIAMOND)).lock();
+		 }).lock();
 
 
-		lockFilled(fillRectangle(new ItemStack(Material.DIAMOND, 5), 10, 33));
+		 lockFilled(fillRectangle(new ItemStack(Material.DIAMOND, 5), 10, 33));
 
-		repeatingTask(20, () -> {
-			Common.tell(getViewers().get(0), "hello");
-		});
+		 repeatingTask(20, () -> {
+		 Common.tell(getViewers().get(0), "hello");
+		 });
 
-		addCloseCallback(e -> {
-			Common.tell(e.getPlayer(), "You closed the menu");
-		});
+		 addCloseCallback(e -> {
+		 Common.tell(e.getPlayer(), "You closed the menu");
+		 });
 
-		setOpenSound(Sound.BLOCK_IRON_DOOR_OPEN);
-		setCloseSound(Sound.BLOCK_IRON_TRAPDOOR_CLOSE);
+		 setOpenSound(Sound.BLOCK_IRON_DOOR_OPEN);
+		 setCloseSound(Sound.BLOCK_IRON_TRAPDOOR_CLOSE);
 
-		setPattern("#&#&#&#&#", "&#&#&#&#&");
-		assignPatternItem('#', new ItemStack(Material.IRON_BLOCK));
-		assignPatternItem('&', new ItemStack(Material.GOLD_BLOCK));
-		//compilePattern();
+		 setPattern("#&#&#&#&#", "&#&#&#&#&");
+		 assignPatternItem('#', new ItemStack(Material.IRON_BLOCK));
+		 assignPatternItem('&', new ItemStack(Material.GOLD_BLOCK));
+		 //compilePattern();
 
-		lockFilled(fillPattern());
+		 lockFilled(fillPattern());
 
-		MenuItem[] items = compilePattern();
-		for (int i = 0; i < items.length; i++) {
+		 MenuItem[] items = compilePattern();
+		 for (int i = 0; i < items.length; i++) {
 
-			int slot = i;
+		 int slot = i;
 
-			items[i] = addClickable(slot, items[i].getItem(), () -> {
-				Common.tell(getViewers().get(0), "this is slot " + slot);
-			});
+		 items[i] = addClickable(slot, items[i].getItem(), () -> {
+		 Common.tell(getViewers().get(0), "this is slot " + slot);
+		 });
 
-			items[i].lock();
-		}*/
+		 items[i].lock();
+		 }*/
 
 		//fillStatic(new ItemStack(Material.AIR));
 
 		setPattern("?&?&?&?&?", "&0000000&", "?0000000?", "&0000000&", "?0000000?", "&?&?&?&?&");
 		assignPatternItem('?', new ItemStack(Material.BLUE_STAINED_GLASS_PANE));
 		assignPatternItem('&', new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE));
-		lockFilled(fillPatternStatic());
+		fillPattern();
 
 		setPagePattern("&#######&", "&&#####&&", "&&&###&&&", "&&&&#&&&&", "&&&&&&&&&");
 
@@ -69,19 +67,15 @@ public class TestTwoMenu extends CursedMenu {
 			items[i] = new ItemStack(Material.values()[i]);
 		}
 
+		addNextPageButton(ItemCreator.of(CompMaterial.ARROW, "&aNext page").build().makeSurvival(), ItemCreator.of(CompMaterial.GRASS, "&cNext page").build().makeSurvival(), 51);
+
+		addPreviousPageButton(ItemCreator.of(CompMaterial.ARROW, "&aLast page").build().makeSurvival(), ItemCreator.of(CompMaterial.GRASS, "&cLast page").build().makeSurvival(), 47);
+
 		addPageItems(items);
-		lockFilled(fillPagesStatic());
-
-		addClickable(51, ItemCreator.of(CompMaterial.ARROW, "&aNext page").build().makeSurvival(), (e) -> {
-			nextPage();
-			lockFilled(fillPagesStatic());
-		}).lock();
-
-		addClickable(47, ItemCreator.of(CompMaterial.ARROW, "&cPrevious page").build().makeSurvival(), (e) -> {
-			new MenuPrompt((Player) getViewers().get(0), this, 100, string -> {
-				addStatic(47, new ItemStack(Objects.requireNonNull(Material.getMaterial(string))));
-			}, "", "&b&lType your input below:", "");
-		}).lock();
+		fillPages(slot -> {
+			slot.allowAllClicks();
+			slot.allow(InventoryAction.PICKUP_ALL, InventoryAction.PICKUP_HALF, InventoryAction.PLACE_SOME, InventoryAction.PLACE_ALL, InventoryAction.PLACE_ONE);
+		});
 
 	}
 }

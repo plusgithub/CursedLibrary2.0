@@ -23,7 +23,7 @@ public class WrapperPlayServerEntityMetadata extends AbstractPacket {
 		super(packet, TYPE);
 	}
 
-	/**
+	/***
 	 * Retrieve Entity ID.
 	 * <p>
 	 * Notes: entity's ID
@@ -34,7 +34,7 @@ public class WrapperPlayServerEntityMetadata extends AbstractPacket {
 		return handle.getIntegers().read(0);
 	}
 
-	/**
+	/***
 	 * Set Entity ID.
 	 *
 	 * @param value - new value.
@@ -43,7 +43,7 @@ public class WrapperPlayServerEntityMetadata extends AbstractPacket {
 		handle.getIntegers().write(0, value);
 	}
 
-	/**
+	/***
 	 * Retrieve the entity of the painting that will be spawned.
 	 *
 	 * @param world - the current world of the entity.
@@ -54,7 +54,7 @@ public class WrapperPlayServerEntityMetadata extends AbstractPacket {
 		return handle.getEntityModifier(world).read(0);
 	}
 
-	/**
+	/***
 	 * Retrieve the entity of the painting that will be spawned.
 	 *
 	 * @param event - the packet event.
@@ -65,7 +65,7 @@ public class WrapperPlayServerEntityMetadata extends AbstractPacket {
 		return getEntity(event.getPlayer().getWorld());
 	}
 
-	/**
+	/***
 	 * Retrieve Metadata.
 	 *
 	 * @return The current Metadata
@@ -75,7 +75,7 @@ public class WrapperPlayServerEntityMetadata extends AbstractPacket {
 		return handle.getWatchableCollectionModifier().read(0);
 	}
 
-	/**
+	/***
 	 * Set Metadata.
 	 *
 	 * @param value - new value.

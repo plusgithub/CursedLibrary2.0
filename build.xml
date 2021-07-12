@@ -29,7 +29,7 @@
 
     <!-- Finally, compile the plugin -->
     <target name="Build">
-        <jar jarfile="${serverPath}\plugins\${ant.project.name}.jar" basedir="./target/classes/" includes="**/*">
+        <jar jarfile="${serverPath}\plugins\${ant.project.name}.jar" basedir="./target/classes/" includes="**/**">
 
             <!--
                 Ant can include other plugin's classes however it cannot repackage them.
@@ -42,7 +42,7 @@
             -->
 
             <zipgroupfileset dir="${user.home}/.m2/repository/com/github/kangarko/Foundation/${foundation.version}/"
-                             includes="**/*${foundation.version}.jar"/>
+                             includes="**/**${foundation.version}.jar"/>
             <!-- <fileset dir="../Foundation/target/classes" /> -->
         </jar>
     </target>
