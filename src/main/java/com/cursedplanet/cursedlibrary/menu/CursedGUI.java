@@ -628,17 +628,23 @@ public class CursedGUI {
 	public CursedSlot[] fillPages(Consumer<CursedSlot> consumer) {
 		int itemsPerPage = getFillableSlots();
 		int startSlot = getStartSlot();
-		int firstIndex = itemsPerPage * currentPage;
+		int firstIndex = (itemsPerPage * (currentPage - 1));
 		int slots = getSlots() - (getSlots() - pagePatternSingle.length()) - 1;
+		int iterator = 0;
 		CursedSlot[] menuItems = new CursedSlot[slots];
+
+		pageItems.stream().forEach(slot -> {
+			Common.log(String.valueOf(slot.getItem()));
+		});
 
 		for (int i = 0; i < slots; i++) {
 			if ((i + startSlot) < getSize() && isPagedSlot(i + startSlot)) {
 				try {
-					menuItems[i] = addClickable(pageItems.get(firstIndex + i).getItem(), i + startSlot, pageItems.get(firstIndex + i).getTask());
+					menuItems[i] = addClickable(pageItems.get(firstIndex + iterator).getItem(), i + startSlot, pageItems.get(firstIndex + iterator).getTask());
 				} catch (Exception e) {
 					menuItems[i] = addStatic(new ItemStack(Material.AIR), i + startSlot);
 				}
+				iterator++;
 			}
 		}
 		//Arrays.asList(menuItems).forEach(consumer);
@@ -791,9 +797,10 @@ public class CursedGUI {
 	 * Resets all the slots in the menu, starting from fresh without creating a new menu
 	 */
 	public void reset() {
-		this.contents = new HashMap<>();
-		for (int i = 0; i < size; i++) {
-			contents.put(i, new CursedSlot(i));
+		//this.contents = new HashMap<>();
+		ItemStack empty = new ItemStack(Material.AIR);
+		for (int i : contents.keySet()) {
+			addStatic(empty, i).allowAllActions().allowAllClicks();
 		}
 		//return contents.keySet().toArray(CursedSlot[]::new);
 	}

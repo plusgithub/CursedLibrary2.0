@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.ItemStack;
-import org.mineacademy.fo.Common;
 import org.mineacademy.fo.menu.model.ItemCreator;
 
 import java.util.UUID;
@@ -33,8 +32,7 @@ public class MenuListeners implements Listener {
 					event.setCancelled(true);
 
 					event.setCancelled(!slot.isClickAllowed(event.getClick()));
-
-					Common.log(String.valueOf(event.getAction()));
+					
 					event.setCancelled(!slot.isActionAllowed(event.getAction()));
 
 				} else if (event.isShiftClick() && event.getCurrentItem() != null) { // This means the click IS in the player inventory

@@ -3,6 +3,7 @@ package com.cursedplanet.cursedlibrary.menu;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.inventory.ItemStack;
+import org.mineacademy.fo.Common;
 import org.mineacademy.fo.menu.model.ItemCreator;
 import org.mineacademy.fo.remain.CompMaterial;
 
@@ -11,6 +12,8 @@ public class TestTwoMenu extends CursedGUI {
 
 	public TestTwoMenu() {
 		super(54, "Cool menu");
+
+		reset();
 
 		/**addStatic(5, new ItemStack(Material.DIAMOND)).lock();
 
@@ -64,14 +67,18 @@ public class TestTwoMenu extends CursedGUI {
 
 
 		for (int i = 0; i < Material.values().length; i++) {
-			items[i] = new ItemStack(Material.values()[i]);
+			int finalI = i;
+			if ((Material.values()[finalI].isBlock() || Material.values()[finalI].isItem()) && Material.values()[finalI] != Material.AIR) {
+				addPageItem(event -> {
+					Common.tell(event.getWhoClicked(), "&aYou clicked " + Material.values()[finalI].toString());
+				}, new ItemStack(Material.values()[i]));
+			}
 		}
 
 		addNextPageButton(ItemCreator.of(CompMaterial.ARROW, "&aNext page").build().makeSurvival(), ItemCreator.of(CompMaterial.GRASS, "&cNext page").build().makeSurvival(), 51);
 
 		addPreviousPageButton(ItemCreator.of(CompMaterial.ARROW, "&aLast page").build().makeSurvival(), ItemCreator.of(CompMaterial.GRASS, "&cLast page").build().makeSurvival(), 47);
 
-		addPageItems(items);
 		fillPages(slot -> {
 			slot.allowAllClicks();
 			slot.allow(InventoryAction.PICKUP_ALL, InventoryAction.PICKUP_HALF, InventoryAction.PLACE_SOME, InventoryAction.PLACE_ALL, InventoryAction.PLACE_ONE);
