@@ -5,3 +5,4 @@ author: Scuffi
 description: Cursed library. Credit to TheAPI(EntityCreator), metalshark(GlowAPI), juliarn(NPC API)
 api-version: 1.16
 #depend: [ SmartInvs ]
+soft-depend: [ ItemsAdder ]

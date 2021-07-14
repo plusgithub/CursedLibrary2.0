@@ -2,6 +2,8 @@ package com.cursedplanet.cursedlibrary.menu;
 
 import com.cursedplanet.cursedlibrary.LibraryPlugin;
 import com.cursedplanet.cursedlibrary.menu.slot.CursedSlot;
+import dev.lone.itemsadder.api.FontImages.FontImageWrapper;
+import dev.lone.itemsadder.api.FontImages.TexturedInventoryWrapper;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -38,6 +40,8 @@ public class CursedGUI {
 	private String[] pattern;
 	private final HashMap<Character, Map<ItemStack, Consumer<InventoryClickEvent>>> assignedPatterns;
 
+	private final TexturedInventoryWrapper customInv;
+
 
 	// Pagination
 	private String pagePatternSingle;
@@ -50,6 +54,37 @@ public class CursedGUI {
 		this.title = Common.colorize(title);
 
 		this.inv = Bukkit.createInventory(new CursedHolder(), this.size, this.title);
+		this.id = ((CursedHolder) inv.getHolder()).getId();
+
+		this.contents = new HashMap<>();
+		for (int i = 0; i < size; i++) {
+			contents.put(i, new CursedSlot(i));
+		}
+
+		this.runnables = new HashMap<>();
+		this.runningTasks = new HashMap<>();
+		consumer = null;
+		updateTask = null;
+		openSound = null;
+		closeSound = null;
+		pattern = null;
+		assignedPatterns = new HashMap<>();
+		customInv = null;
+
+		this.pagePatternSingle = null;
+		this.pageItems = new ArrayList<>();
+		this.currentPage = 1;
+		pageButtons = new CursedPageButton();
+
+		MenuHandler.addInventory(this);
+	}
+
+	public CursedGUI(int size, String title, FontImageWrapper texture) {
+		this.size = size;
+		this.title = Common.colorize(title);
+
+		customInv = new TexturedInventoryWrapper(new CursedHolder(), this.size, Common.colorize(this.title), texture);
+		this.inv = customInv.getInternal();
 		this.id = ((CursedHolder) inv.getHolder()).getId();
 
 		this.contents = new HashMap<>();
@@ -782,6 +817,7 @@ public class CursedGUI {
 	 * Get the maximum amount of pages with the current added items
 	 */
 	public int getMaxPages() {
+		// TODO: when no items added, fix this
 		return (int) Math.ceil((double) pageItems.size() / (double) getFillableSlots());
 	}
 
@@ -882,7 +918,10 @@ public class CursedGUI {
 	 * @param player, the player to show the menu to
 	 */
 	public void display(Player player) {
-		player.openInventory(this.inv);
+		if (customInv != null)
+			customInv.showInventory(player);
+		else
+			player.openInventory(this.inv);
 
 		if (openSound != null)
 			player.playSound(player.getLocation(), this.openSound, 1, 1);
