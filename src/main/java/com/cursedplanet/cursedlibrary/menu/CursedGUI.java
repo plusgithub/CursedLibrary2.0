@@ -736,7 +736,7 @@ public class CursedGUI {
 	 * @return boolean if the page is the last page
 	 */
 	public boolean isLastPage() {
-		return getPage() == getMaxPages();
+		return getPage() == getMaxPages() && getMaxPages() != 1;
 	}
 
 	/***
