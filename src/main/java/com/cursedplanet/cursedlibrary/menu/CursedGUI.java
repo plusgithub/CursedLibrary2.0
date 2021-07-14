@@ -1,5 +1,6 @@
 package com.cursedplanet.cursedlibrary.menu;
 
+import com.cursedplanet.cursedlibrary.LibraryPlugin;
 import com.cursedplanet.cursedlibrary.menu.slot.CursedSlot;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -10,6 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.PlayerUtil;
 
@@ -27,6 +29,8 @@ public class CursedGUI {
 	protected HashMap<Integer, CursedSlot> contents;
 	protected Inventory inv;
 	private final UUID id;
+	private final HashMap<CursedGUI, HashMap<Runnable, String>> runnables;
+	private final HashMap<CursedGUI, List<BukkitTask>> runningTasks;
 	protected Consumer<InventoryCloseEvent> consumer;
 	protected Consumer<InventoryClickEvent> updateTask;
 	protected Sound openSound;
@@ -52,6 +56,9 @@ public class CursedGUI {
 		for (int i = 0; i < size; i++) {
 			contents.put(i, new CursedSlot(i));
 		}
+
+		this.runnables = new HashMap<>();
+		this.runningTasks = new HashMap<>();
 		consumer = null;
 		updateTask = null;
 		openSound = null;
@@ -794,6 +801,59 @@ public class CursedGUI {
 	}
 
 	/**
+	 * Schedule a repeating task whilst the inventory is open for this player
+	 *
+	 * @param repeat How long in between the task runs
+	 * @param task   The task runnable
+	 */
+	public void repeatingTask(long repeat, Runnable task) {
+		repeatingTask(0L, repeat, task);
+	}
+
+	/**
+	 * Schedule a repeating task whilst the inventory is open for this player
+	 *
+	 * @param delay  The initial delay before the task starts to run
+	 * @param repeat How long in between the task runs
+	 * @param task   The task runnable
+	 */
+	public void repeatingTask(long delay, long repeat, Runnable task) {
+		String newTimings = delay + "," + repeat;
+		HashMap<Runnable, String> temp = new HashMap<>();
+		if (runnables.containsKey(this)) {
+			temp = runnables.get(this);
+		}
+		temp.put(task, newTimings);
+		runnables.put(this, temp);
+	}
+
+	private void startRunnables() {
+		Map<Runnable, String> temp = runnables.get(this);
+		if (temp != null && !temp.isEmpty()) {
+			List<BukkitTask> tasks = new ArrayList<>();
+			for (Runnable task : temp.keySet()) {
+				String[] timings = temp.get(task).split(",");
+				tasks.add(Bukkit.getScheduler().runTaskTimer(LibraryPlugin.getInstance(), task, Long.decode(timings[0]), Long.decode(timings[1])));
+			}
+			runnables.remove(this);
+			runningTasks.put(this, tasks);
+		}
+	}
+
+	/**
+	 * Stop the current running runnables
+	 */
+	public void stopRunnables() {
+		List<BukkitTask> temp = runningTasks.get(this);
+		if (temp != null) {
+			for (BukkitTask task : temp) {
+				task.cancel();
+			}
+			runningTasks.remove(this);
+		}
+	}
+
+	/**
 	 * Resets all the slots in the menu, starting from fresh without creating a new menu
 	 */
 	public void reset() {
@@ -826,5 +886,7 @@ public class CursedGUI {
 
 		if (openSound != null)
 			player.playSound(player.getLocation(), this.openSound, 1, 1);
+
+		startRunnables();
 	}
 }

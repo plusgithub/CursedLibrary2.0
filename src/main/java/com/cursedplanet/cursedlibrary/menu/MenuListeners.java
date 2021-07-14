@@ -32,7 +32,7 @@ public class MenuListeners implements Listener {
 					event.setCancelled(true);
 
 					event.setCancelled(!slot.isClickAllowed(event.getClick()));
-					
+
 					event.setCancelled(!slot.isActionAllowed(event.getAction()));
 
 				} else if (event.isShiftClick() && event.getCurrentItem() != null) { // This means the click IS in the player inventory
@@ -97,6 +97,8 @@ public class MenuListeners implements Listener {
 			UUID id = ((CursedHolder) event.getInventory().getHolder()).getId();
 
 			CursedGUI gui = MenuHandler.getInventory(id);
+
+			gui.stopRunnables();
 
 			if (gui.consumer != null)
 				gui.consumer.accept(event);
